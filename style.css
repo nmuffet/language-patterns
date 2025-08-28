@@ -1,0 +1,42 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Host Grotesk";
+
+}
+
+body, .controls, input {
+    font-size: 20px;
+
+}
+
+input:focus, textarea:focus, select:focus{ outline: none; }
+
+input {
+  border: none;
+  /* Optional: Add background or padding for clarity */
+  background-color: #f0f0f0;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+
+
+canvas {
+  display: block;
+}
+
+
+button {
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  color: white;
+  background-color: rgb(12, 111, 34);
+  border-radius: 4px;
+}
+
+button:hover{
+  background-color:rgb(6, 78, 22)
+}
