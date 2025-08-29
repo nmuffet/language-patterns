@@ -5,13 +5,14 @@
 // sin density => unicode but this is bad because wave is stretched over length of art, which is heavily influenced by r
 
 
+
 let artProperties = null;
 let color1 = '#CDFC0F';
 let color2 ='#0d3263';
 let color3 = '#6E1912';
 
 function setup() {
-  let width = 600;
+  let width = document.getElementById('canvas-container').getBoundingClientRect().width;
   let height = 600;
   let canvas = createCanvas(width, height);
 

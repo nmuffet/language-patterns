@@ -26,6 +26,9 @@ canvas {
   display: block;
 }
 
+#canvas-container{
+  max-width:800px;
+}
 
 button {
   padding: 8px 16px;
