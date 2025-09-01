@@ -18,7 +18,14 @@ let strokeArray = [2,4,6,8,10,12];
 let letterAngles = [];
 letterSpeed = [];
 
+let font;
+function preload() {
+  font = loadFont('./InclusiveSans-bold.ttf')
+}
 
+
+
+const nameInputElement = document.getElementById('nameInput');
 
 const generateButton = document.getElementById('generateButton');
 
@@ -34,6 +41,11 @@ function setup() {
    canvas.parent('canvas-container');
    
   const ctx = document.getElementById('defaultCanvas0').getContext("2d");
+  textAlign(RIGHT);
+  textSize(24);
+  textFont(font);
+  generateArt();
+
 }
 
 function draw() {
@@ -54,14 +66,16 @@ function draw() {
     rotate(oldAngle * -1);
 
 
-    drawingContext.setLineDash([]);
     strokeWeight(strokeArray[artProperties.uniArray[i] % strokeArray.length]);
     rotate(map(artProperties.uniArray[i], 65, 122, 0, 360, true));
     
     let paletteIndex = (artProperties.uniSum + artProperties.uniArray[i]) % artProperties.palette.length;
 
+    if (artProperties.originalText.includes('mount' | 'Mount')){
+      paletteIndex=0
+    }
+
     color2 = `#${artProperties.palette[paletteIndex]}`
-    // console.log(`Color 2 is ${color2}`);
 
     function checkContrast(){ const c = chroma.contrast(color2,color1);
       // console.log(`Contrast of ${color2} and ${color1} is ${chroma.contrast(color2,color1)}`);
@@ -95,7 +109,7 @@ function draw() {
 
 
       // r mapped to position in index
-      let baseR = map(i,0,artProperties.letterCount, 20, width/2, true);
+      let baseR = map(i,0,artProperties.letterCount-1, 20, width/2-45, true);
 
       let r = baseR;
 
@@ -107,26 +121,34 @@ function draw() {
     endShape();
 
     oldAngle = letterAngles[i];
+    
   }
-  rotateLetters(1);
+  //end rings loop
+
+
+  rotateLetters(.075);
+
+  resetMatrix();
+
+  fill(color2);
+  noStroke();
+  text(artProperties.originalText,width-12,width-12);
+  noFill();
+    
   
 }
-const nameInputElement = document.getElementById('nameInput');
+
 
 // nameInputElement.addEventListener('input',generateArt);
 
-let userName = nameInputElement.value;
+
 
 
 
 
 function generateArt(){
 
-  const nameInputElement = document.getElementById('nameInput');
-
-  const userName = nameInputElement.value;
-  // const userName = 'Sara Kinsinger';
-  console.log(userName);
+  let userName = setName();
   const uniArray = (()=>{
       let arr = [];
       for (let i = 0; i < userName.length; ++i){
@@ -143,7 +165,7 @@ function generateArt(){
     letterCount: userName.length,
     uniArray: uniArray,
     uniSum: uniSum,
-    palette: buildPalette(uniSum),
+    palette: buildPalette(uniSum, userName),
     letterSpeeds: (()=>{
       let arr = [];
       let letterSpeed;
@@ -174,6 +196,24 @@ function getUnicodes (s,arr) {
   }
 }
 
+function setName(){
+
+
+  let name = nameInputElement.value;
+  // const userName = 'Sara Kinsinger';
+  if(name == ''){
+    name= 'The University of Mount Union'
+  };
+
+  console.log(name);
+  return name;
+}
+
+nameInputElement.onkeydown = function(e){
+   if(e.keyCode == 13){
+     generateArt();
+   }
+};
 
 function windowResized() {
   let cWidth = min(windowWidth, 800);
@@ -190,7 +230,7 @@ function windowResized() {
   
 }
 
-function buildPalette(uniSum){
+function buildPalette(uniSum,userName){
   // let hue1 = map(uniSum, uniSumMin, uniSumMax, 0, 360, true);
   let hue1 = uniSum % 360;
 
@@ -199,9 +239,16 @@ function buildPalette(uniSum){
       .variation('default')
       // .distance(.75);   
 
-  var colors = scheme.colors();
-  console.log(colors);
+  let colors = scheme.colors();
+
+  if(userName.toLowerCase().includes('mount')) {
+    console.log('includes Mount');
+    colors = ['2e1a47','752f8a','d8d8d8','f44336']
+
+  }
+
   return colors;
+
 }
 
 
