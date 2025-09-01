@@ -24,11 +24,10 @@ input {
 
 canvas {
   display: block;
+  max-width: 800px;
 }
 
-#canvas-container{
-  max-width:800px;
-}
+
 
 button {
   padding: 8px 16px;
