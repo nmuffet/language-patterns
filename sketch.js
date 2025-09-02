@@ -18,11 +18,6 @@ let strokeArray = [2,4,6,8,10,12];
 let letterAngles = [];
 letterSpeed = [];
 
-let font;
-function preload() {
-  font = loadFont('./InclusiveSans-bold.ttf')
-}
-
 
 
 const nameInputElement = document.getElementById('nameInput');
@@ -33,9 +28,8 @@ generateButton.addEventListener('click', generateArt);
 
 
 
-
 function setup() {
-  let cWidth = min(windowWidth, 800);
+  let cWidth = min(windowWidth, 900);
    canvas = createCanvas(cWidth, cWidth);
 
    canvas.parent('canvas-container');
@@ -43,7 +37,8 @@ function setup() {
   const ctx = document.getElementById('defaultCanvas0').getContext("2d");
   textAlign(RIGHT);
   textSize(24);
-  textFont(font);
+  textFont('Fira Sans');
+  textStyle(BOLD);
   generateArt();
 
 }

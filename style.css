@@ -1,8 +1,12 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "Host Grotesk";
+  font-family: "Fira Sans";
 
+}
+
+body {
+  padding:2%;
 }
 
 body, .controls, input {
@@ -24,8 +28,14 @@ input {
 
 canvas {
   display: block;
-  max-width: 800px;
+  max-width: 900px;
 }
+
+
+.hero-container{
+  display:flex;
+}
+
 
 
 
@@ -35,11 +45,11 @@ button {
   font-size: 16px;
   border: none;
   color: white;
-  background-color: rgb(12, 111, 34);
+  background-color: #2e1a47;
   border-radius: 4px;
 }
 
 button:hover{
-  background-color:rgb(6, 78, 22)
+  background-color:#170b27
 }
 
