@@ -5,8 +5,14 @@ html, body {
 
 }
 
-body {
-  padding:2%;
+h1{
+  text-align: center;
+  font-size: 8rem;
+}
+.hero-text{
+  display: flex;
+  align-content: center;
+  padding: 0 10%;
 }
 
 body, .controls, input {
@@ -28,7 +34,7 @@ input {
 
 canvas {
   display: block;
-  max-width: 900px;
+  width: 100%;
 }
 
 
