@@ -29,11 +29,9 @@ generateButton.addEventListener('click', generateArt);
 
 
 function setup() {
-  let cWidth = min(windowWidth, 900);
-   canvas = createCanvas(cWidth, cWidth);
-
-   canvas.parent('canvas-container');
-   
+  const el = document.getElementById('canvas-container');
+  const cWidth = el.offsetWidth || Math.min(windowWidth, 900);
+  createCanvas(cWidth, cWidth).parent('canvas-container');
   const ctx = document.getElementById('defaultCanvas0').getContext("2d");
   textAlign(RIGHT);
   textSize(24);
@@ -210,20 +208,7 @@ nameInputElement.onkeydown = function(e){
    }
 };
 
-function windowResized() {
-  let cWidth = min(windowWidth, 800);
-  resizeCanvas(cWidth, cWidth);
-
-
-  canvas.parent('canvas-container');
-
   
-
-
-  // noLoop()
-  redraw();
-  
-}
 
 function buildPalette(uniSum,userName){
   // let hue1 = map(uniSum, uniSumMin, uniSumMax, 0, 360, true);
@@ -257,4 +242,12 @@ function rotateLetters(speed){
     }
   }
 }
+
+function windowResized() {
+  let canvasContainer = document.getElementById('canvas-container');
+  let cWidth = canvasContainer.offsetWidth;
+  resizeCanvas(cWidth, cWidth);
+  redraw();
+}
+
 
