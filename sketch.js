@@ -1,10 +1,12 @@
 // // #region
 
 // MAPPINGS
-// radius=>unicode
+// radius=>position in array
+// speed => unicode
 // angle(%closed) =>unicode
-// rotation => prior unicode + position in array
-// sin density => unicode but this is bad because wave is stretched over length of art, which is heavily influenced by r
+// rotation direction => vowl/consonant
+//color of arc =>uniSum + index % palette length
+// palette => unisum
 
 
 
@@ -18,6 +20,12 @@ let strokeArray = [2,4,6,8,10,12];
 let letterAngles = [];
 letterSpeed = [];
 
+const canvasContainer = document.getElementById('canvas-container');
+function getContainerWidth(){
+  return canvasContainer.offsetWidth
+}
+let containerWidth = getContainerWidth();
+
 
 
 const nameInputElement = document.getElementById('nameInput');
@@ -29,7 +37,7 @@ generateButton.addEventListener('click', generateArt);
 
 
 function setup() {
-  let cWidth = min(windowWidth, 900);
+  let cWidth = containerWidth;
    canvas = createCanvas(cWidth, cWidth);
 
    canvas.parent('canvas-container');
@@ -37,8 +45,8 @@ function setup() {
   const ctx = document.getElementById('defaultCanvas0').getContext("2d");
   textAlign(RIGHT);
   textSize(24);
-  textFont('Fira Sans');
-  textStyle(BOLD);
+  textFont('Mona Sans');
+  // textStyle(BOLD);
   generateArt();
 
 }
@@ -129,6 +137,8 @@ function draw() {
   noStroke();
   text(artProperties.originalText,width-12,width-12);
   noFill();
+
+  
     
   
 }
@@ -176,7 +186,8 @@ function generateArt(){
     letterAngles.push(0)
 };
   color1 = `#${artProperties.palette[0]}`;
-;
+
+  document.getElementsByTagName('h1')[0].style.color=color1;
 
   return artProperties;
 }
@@ -195,7 +206,6 @@ function setName(){
 
 
   let name = nameInputElement.value;
-  // const userName = 'Sara Kinsinger';
   if(name == ''){
     name= 'The University of Mount Union'
   };
@@ -211,8 +221,9 @@ nameInputElement.onkeydown = function(e){
 };
 
 function windowResized() {
-  let cWidth = min(windowWidth, 800);
+  let cWidth = getContainerWidth();
   resizeCanvas(cWidth, cWidth);
+  console.log(cWidth);
 
 
   canvas.parent('canvas-container');
@@ -250,7 +261,7 @@ function buildPalette(uniSum,userName){
 
 function rotateLetters(speed){
   for(let i =0; i<artProperties.originalText.length; ++i){
-    if (['a','e','i','o','u'].includes(artProperties.originalText[i])){
+    if (['a','e','i','o','u'].includes(artProperties.originalText[i].toLowerCase())){
       letterAngles[i] = ((letterAngles[i] - (artProperties.letterSpeeds[i]*speed)) % 360);
     }
     else {letterAngles[i]= ((letterAngles[i] + (artProperties.letterSpeeds[i]*speed)) % 360);
