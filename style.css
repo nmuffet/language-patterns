@@ -73,18 +73,13 @@ h1{
 
 body, .controls, input {
     font-size: 18px;
-
+    text-align: center;
+    margin:8px 0;
   }
 
 button {
-padding: 16px 24px;
-font-weight: 600;
-font-size: 18px;
-border: none;
-color: white;
-background-color: #2e1a47;
-border-radius: 4px;
-margin-left:16px;
+  font-size: 18px;
+  margin-left:0;
 }
 
 }
