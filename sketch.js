@@ -17,6 +17,8 @@ let scheme = new ColorScheme;
 let a=0;
 let strokeArray = [2,4,6,8,10,12];
 
+
+
 let letterAngles = [];
 letterSpeed = [];
 
@@ -26,7 +28,9 @@ function getContainerWidth(){
 }
 let containerWidth = getContainerWidth();
 
-
+if (containerWidth < 800) {
+  strokeArray = [.5,1,1.5,2,2.5,3];
+}
 
 const nameInputElement = document.getElementById('nameInput');
 

@@ -74,6 +74,10 @@ h1{
 body, .controls, input {
     font-size: 18px;
     text-align: center;
+    
+  }
+
+  .contrals, input {
     margin:8px 0;
   }
 
